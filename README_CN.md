@@ -2,6 +2,8 @@
 
 Kucoin 文档地址 [https://docs.kucoin.com/cn](https://docs.kucoin.com/cn)
 
+Kumex 文档地址 [https://docs.kumex.com/cn](https://docs.kumex.com/cn)
+
 所有接口方法的初始化都与kucoin提供的方法相同。更多细节 [src/api](https://github.com/zhouaini528/kucoin-php/tree/master/src/Api)
 
 很多接口还未完善，使用者可以根据我的设计方案继续扩展，欢迎与我一起迭代它。
