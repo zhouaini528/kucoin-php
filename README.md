@@ -2,6 +2,8 @@
 
 Kucoin docs [https://docs.kucoin.com](https://docs.kucoin.com)
 
+Kumex docs [https://docs.kumex.com](https://docs.kumex.com)
+
 All interface methods are initialized the same as those provided by kucoin. See details [src/api](https://github.com/zhouaini528/kucoin-php/tree/master/src/Api)
 
 Many interfaces are not yet complete, and users can continue to extend them based on my design. Welcome to improve it with me
