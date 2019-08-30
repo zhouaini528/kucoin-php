@@ -29,7 +29,7 @@ Kumex 文档地址 [https://docs.kumex.com/cn](https://docs.kumex.com/cn)
 composer require "linwj/kucoin dev-master"
 ```
 
-支持本地开发代理设置 [More](https://github.com/zhouaini528/okex-php/blob/master/tests/spot/proxy.php#L21)
+支持更多的请求设置 [More](https://github.com/zhouaini528/okex-php/blob/master/tests/spot/proxy.php#L21)
 ```php
 $okex=new OkexSpot();
 //You can set special needs
