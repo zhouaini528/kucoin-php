@@ -3,35 +3,53 @@
  * @author lin <465382251@qq.com>
  * */
 
-namespace Lin\Okex\Api\Futures;
+namespace Lin\Ku\Api\Kumex;
 
-use Lin\Okex\Request;
+use Lin\Ku\Request;
 
 class Position extends Request
 {
     /**
-     * Get the information of all holding positions in futures trading.Due to high energy consumption, you are advised to capture data with the "Futures Account of a Currency" API instead.
-     * 
+     * GET /api/v1/position
      * */
-    public function getAll(){
+    public function get(array $data=[]){
         $this->type='GET';
-        $this->path='/api/futures/v3/position';
+        $this->path='/api/v1/position';
+        $this->data=$data;
         
         return $this->exec();
     }
     
     /**
-     * Get the information of holding positions of a contract.
-     * 
-        Parameters	Parameters Types	Required	Description
-        instrument_id	String	Yes	Contract ID, e.g.“BTC-USD-180213”
+     * GET /api/v1/positions
      * */
-    public function get(array $data){
+    public function getAll(){
         $this->type='GET';
-        $this->path='/api/futures/v3/'.$data['instrument_id'].'/position';
+        $this->path='/api/v1/positions';
         
+        return $this->exec();
+    }
+    
+    /**
+     * POST /api/v1/position/margin/auto-deposit-status
+     * */
+    public function postAutoDepositStatus(array $data=[]){
+        $this->type='POST';
+        $this->path='/api/v1/position/margin/auto-deposit-status';
         $this->data=$data;
         
         return $this->exec();
     }
+    
+    /**
+     * POST /api/v1/position/margin/deposit-margin
+     * */
+    public function postDepositMargin(array $data=[]){
+        $this->type='POST';
+        $this->path='/api/v1/position/margin/deposit-margin';
+        $this->data=$data;
+        
+        return $this->exec();
+    }
+    
 }

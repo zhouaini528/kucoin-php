@@ -3,22 +3,22 @@
 
 /**
  * @author lin <465382251@qq.com>
- * 
+ *
  * Fill in your key and secret and pass can be directly run
- * 
+ *
  * Most of them are unfinished and need your help
  * https://github.com/zhouaini528/okex-php.git
  * */
-use Lin\Okex\OkexFuture;
+use Lin\Ku\Kumex;
 
 require __DIR__ .'../../../vendor/autoload.php';
 
 include 'key_secret.php';
 
-$okex=new OkexFuture($key,$secret,$passphrase);
+$kumex=new Kumex($key,$secret,$passphrase,$host);
 
 //You can set special needs
-$okex->setOptions([
+$kumex->setOptions([
     //Set the request timeout to 60 seconds by default
     'timeout'=>10,
     
@@ -31,16 +31,19 @@ $okex->setOptions([
      'no'    =>  ['.cn']
      ], */
     //Close the certificate
-    //'verify'=>false,
+    'verify'=>false,
 ]);
 
-//Place an Order
+$clientOid=rand(10000,99999).rand(10000,99999);
 try {
-    $result=$okex->order()->post([
-        'instrument_id'=>'BTC-USD-190927',
-        'type'=>'1',
-        'price'=>'100',
-        'size'=>'1',
+    $result=$kumex->order()->post([
+        'clientOid'=>$clientOid,
+        'side'=>'buy',
+        'symbol'=>'XBTUSDM',
+        'leverage'=>10,
+        
+        'price'=>9000,
+        'size'=>10,
     ]);
     print_r($result);
 }catch (\Exception $e){
@@ -48,11 +51,9 @@ try {
 }
 sleep(1);
 
-//Get order details by order ID.
 try {
-    $result=$okex->order()->get([
-        'instrument_id'=>'BTC-USD-190927',
-        'order_id'=>$result['order_id'],
+    $result=$kumex->order()->get([
+        'order-id'=>$result['data']['orderId'],
     ]);
     print_r($result);
 }catch (\Exception $e){
@@ -60,16 +61,12 @@ try {
 }
 sleep(1);
 
-//Cancelling an unfilled order.
 try {
-    $result=$okex->order()->postCancel([
-        'instrument_id'=>'BTC-USD-190927',
-        'order_id'=>$result['order_id'],
+    $result=$kumex->order()->delete([
+        'order-id'=>$result['data']['id'],
     ]);
     print_r($result);
 }catch (\Exception $e){
     print_r(json_decode($e->getMessage(),true));
 }
-
-
 

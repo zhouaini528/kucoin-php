@@ -13,9 +13,7 @@ use Lin\Ku\Kucoin;
 
 require __DIR__ .'../../../vendor/autoload.php';
 
-include 'key_secret.php';
-
-$kucoin=new Kucoin($key,$secret,$passphrase,$host);
+$kucoin=new Kucoin();
 
 //You can set special needs
 $kucoin->setOptions([

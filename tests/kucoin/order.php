@@ -56,7 +56,6 @@ sleep(1);
 try {
     $result=$kucoin->order()->get([
         'orderId'=>$result['data']['orderId']
-        //'orderId'=>'5d689024ef83c7622b9b66b6',
     ]);
     print_r($result);
 }catch (\Exception $e){
@@ -67,7 +66,6 @@ sleep(1);
 try {
     $result=$kucoin->order()->delete([
         'orderId'=>$result['data']['id']
-        //'orderId'=>'5d689024ef83c7622b9b66b6'
     ]);
     print_r($result);
 }catch (\Exception $e){
@@ -77,7 +75,6 @@ sleep(1);
 
 try {
     $result=$kucoin->order()->deleteAll([
-        //'orderId'=>$result['data']['orderId']
         'symbol'=>'ETH-BTC'
     ]);
     print_r($result);

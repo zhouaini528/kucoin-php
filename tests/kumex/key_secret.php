@@ -1,4 +1,6 @@
 <?php
-$key='59c1ff25-e864-46f7-947b-403bccde8cad';
-$secret='32FA1043D55ACD3F0605851645103232';
-$passphrase='bai123456';
+$key='5d68e2eaef83c7206c39f6a3';
+$secret='1b33b2c4-7e95-45ae-a85f-7ffc036947ed';
+$passphrase='asdasd123Aa';
+$host='https://sandbox-api.kumex.com';
+

@@ -27,71 +27,69 @@ Many interfaces are not yet complete, and users can continue to extend them base
 composer require "linwj/kucoin dev-master"
 ```
 
-Support for more request Settings [More](https://github.com/zhouaini528/okex-php/blob/master/tests/spot/proxy.php#L21)
+Support for more request Settings
 ```php
-$okex=new OkexSpot();
+$kucoin=new kucoin();
 //You can set special needs
-$okex->setOptions([
+$kucoin->setOptions([
     //Set the request timeout to 60 seconds by default
     'timeout'=>10,
     
     //If you are developing locally and need an agent, you can set this
     'proxy'=>true,
+
     //More flexible Settings
     /* 'proxy'=>[
      'http'  => 'http://127.0.0.1:12333',
      'https' => 'http://127.0.0.1:12333',
      'no'    =>  ['.cn']
      ], */
+
     //Close the certificate
     //'verify'=>false,
 ]);
 ```
 
-### Spot Trading API
+### Kucoin Trading API
 
-Instrument related API [More](https://github.com/zhouaini528/okex-php/blob/master/tests/spot/instrument.php)
+Order Book [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kucoin/market.php)
 
 ```php
-use Lin\Okex\OkexSpot;
-$okex=new OkexSpot();
+$kucoin=new kucoin();
 
-//Getting the order book of a trading pair. Pagination is not supported here. 
-//The whole book will be returned for one request. WebSocket is recommended here.
 try {
-    $result=$okex->instrument()->getBook([
-        'instrument_id'=>'BTC-USDT',
-        'size'=>20
+    $result=$kucoin->market()->getOrderBookLevel1([
+        'symbol'=>'BTC-USDT'
     ]);
     print_r($result);
 }catch (\Exception $e){
     print_r(json_decode($e->getMessage(),true));
 }
 
-//Get market data. This endpoint provides the snapshots of market data and can be used without verifications.
-//List trading pairs and get the trading limit, price, and more information of different trading pairs.
 try {
-    $result=$okex->instrument()->get();
+    $result=$kucoin->market()->getOrderBookLevel2([
+        'symbol'=>'BTC-USDT'
+    ]);
     print_r($result);
 }catch (\Exception $e){
     print_r(json_decode($e->getMessage(),true));
 }
 ```
 
-Order related API [More](https://github.com/zhouaini528/okex-php/blob/master/tests/spot/order.php)
+Order related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kucoin/order.php)
 
 ```php
-$okex=new OkexSpot($key,$secret,$passphrase);
-//Place an Order
+$client_id=rand(10000,99999).rand(10000,99999);
 try {
-    $result=$okex->order()->post([
-        'instrument_id'=>'btc-usdt',
+    $result=$kucoin->order()->post([
+        'clientOid'=>$client_id,
         'side'=>'buy',
-        'price'=>'100',
-        'size'=>'0.001',
+        'symbol'=>'ETH-BTC',
+        'price'=>'0.0001',
+        'size'=>'10',
         
         //'type'=>'market',
-        //'notional'=>'100'
+        //'size'=>'0.1'
     ]);
     print_r($result);
 }catch (\Exception $e){
@@ -99,11 +97,9 @@ try {
 }
 sleep(1);
 
-//Get order details by order ID.
 try {
-    $result=$okex->order()->get([
-        'instrument_id'=>'btc-usdt',
-        'order_id'=>$result['order_id'],
+    $result=$kucoin->order()->get([
+        'orderId'=>$result['data']['orderId']
     ]);
     print_r($result);
 }catch (\Exception $e){
@@ -111,122 +107,68 @@ try {
 }
 sleep(1);
 
-//Cancelling an unfilled order.
 try {
-    $result=$okex->order()->postCancel([
-        'instrument_id'=>'btc-usdt',
-        'order_id'=>$result['order_id'],
+    $result=$kucoin->order()->delete([
+        'orderId'=>$result['data']['id']
     ]);
     print_r($result);
 }catch (\Exception $e){
     print_r(json_decode($e->getMessage(),true));
-}
-```
-
-Accounts related API [More](https://github.com/zhouaini528/okex-php/blob/master/tests/spot/accounts.php)
-
-```php
-$okex=new OkexSpot($key,$secret,$passphrase);
-
-//This endpoint supports getting the list of assets(only show pairs with balance larger than 0), 
-//The balances, amount available/on hold in spot accounts.
-try {
-    $result=$okex->account()->getAll();
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-
-//This endpoint supports getting the balance, amount available/on hold of a token in spot account.
-try {
-    $result=$okex->account()->get([
-        'currency'=>'BTC'
-    ]);
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-
-//All paginated requests return the latest information (newest) as the first page sorted by newest (in chronological time) first.
-try {
-    $result=$okex->account()->getLedger([
-        'currency'=>'btc',
-        'limit'=>2,
-    ]);
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-
-```
-
-[More use cases](https://github.com/zhouaini528/okex-php/tree/master/tests/spot)
-
-[More API](https://github.com/zhouaini528/okex-php/tree/master/src/Api/Spot)
-
-### Futures Trading API
-
-Instrument related API [More](https://github.com/zhouaini528/okex-php/blob/master/tests/future/instrument.php)
-
-```php
-$okex=new OkexFuture();
-
-//List all contracts. This request does not support pagination. The full list will be returned for a request.
-try {
-    $result=$okex->instrument()->getBook([
-        'instrument_id'=>'BTC-USD-190628',
-        'size'=>20,
-    ]);
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-
-//Get market data. This endpoint provides the snapshots of market data and can be used without verifications.
-try {
-    $result=$okex->instrument()->get();
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-```
-
-Order related API [More](https://github.com/zhouaini528/okex-php/blob/master/tests/future/order.php)
-
-```php
-$okex=new OkexFuture($key,$secret,$passphrase);
-
-//Place an Order
-try {
-    $result=$okex->order()->post([
-        'instrument_id'=>'btc-usd-190628',
-        'type'=>'1',
-        'price'=>'100',
-        'size'=>'1',
-    ]);
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
+} 
 sleep(1);
 
-//Get order details by order ID.
 try {
-    $result=$okex->order()->get([
-        'instrument_id'=>'btc-usd-190628',
-        'order_id'=>$result['order_id'],
+    $result=$kucoin->order()->deleteAll([
+        'symbol'=>'ETH-BTC'
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+} 
+```
+
+Accounts related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kucoin/accounts.php)
+
+```php
+try {
+    $result=$kucoin->account()->getAll();
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
+
+try {
+    $result=$kucoin->account()->get([
+        'accountId'=>'5d5cba60ef83c753ca6ddd16',
     ]);
     print_r($result);
 }catch (\Exception $e){
     print_r(json_decode($e->getMessage(),true));
 }
-sleep(1);
 
-//Cancelling an unfilled order.
+```
+
+[More use cases](https://github.com/zhouaini528/kucoin-php/tree/master/tests/kucoin)
+
+[More API](https://github.com/zhouaini528/kucoin-php/tree/master/src/Api/Kucoin)
+
+### Kumex Trading API
+
+Order Book API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kumex/level.php)
+
+```php
 try {
-    $result=$okex->order()->postCancel([
-        'instrument_id'=>'btc-usd-190628',
-        'order_id'=>$result['order_id'],
+    $result=$kumex->level()->getTwoSnapshot([
+        'symbol'=>'XBTUSDM',
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
+
+try {
+    $result=$kumex->level()->getThreeSnapshot([
+        'symbol'=>'XBTUSDM',
     ]);
     print_r($result);
 }catch (\Exception $e){
@@ -234,102 +176,29 @@ try {
 }
 ```
 
-Accounts related API [More](https://github.com/zhouaini528/okex-php/blob/master/tests/future/accounts.php)
+Order related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kumex/order.php)
 
 ```php
-$okex=new OkexSpot($key,$secret,$passphrase);
-//This endpoint supports getting the list of assets(only show pairs with balance larger than 0), the balances, amount available/on hold in spot accounts.
+$clientOid=rand(10000,99999).rand(10000,99999);
 try {
-    $result=$okex->account()->getAll();
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-
-//This endpoint supports getting the balance, amount available/on hold of a token in spot account.
-try {
-    $result=$okex->account()->get([
-        'currency'=>'BTC'
-    ]);
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-
-//All paginated requests return the latest information (newest) as the first page sorted by newest (in chronological time) first.
-try {
-    $result=$okex->account()->getLedger([
-        'currency'=>'btc',
-        'limit'=>2,
-    ]);
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-```
-
-Position related API [More](https://github.com/zhouaini528/okex-php/blob/master/tests/future/position.php)
-```php
-$okex=new OkexFuture($key,$secret,$passphrase);
-
-//Get the information of holding positions of a contract.
-try {
-    $result=$okex->position()->get([
-        'instrument_id'=>'BTC-USD-190628',
-    ]);
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-
-//Get the information of all holding positions in futures trading.Due to high energy consumption,
-//You are advised to capture data with the "Futures Account of a Currency" API instead.
-try {
-    $result=$okex->position()->getAll();
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-```
-
-### Swap Trading API
-
-Instrument related API [More](https://github.com/zhouaini528/okex-php/blob/master/tests/swap/instrument.php)
-```php
-$okex=new OkexFuture();
-
-//List all contracts. This request does not support pagination. The full list will be returned for a request.
-try {
-    $result=$okex->instrument()->getDepth([
-        'instrument_id'=>'BTC-USD-SWAP',
+    $result=$kumex->order()->post([
+        'clientOid'=>$clientOid,
+        'side'=>'buy',
+        'symbol'=>'XBTUSDM',
+        'leverage'=>10,
+        
+        'price'=>9000,
         'size'=>10,
     ]);
-    
     print_r($result);
 }catch (\Exception $e){
     print_r(json_decode($e->getMessage(),true));
 }
+sleep(1);
 
-//Get market data. This endpoint provides the snapshots of market data and can be used without verifications.
 try {
-    $result=$okex->instrument()->get();
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-```
-
-Order related API [More](https://github.com/zhouaini528/okex-php/blob/master/tests/swap/order.php)
-```php
-$okex=new OkexFuture($key,$secret,$passphrase);
-
-//Place an Order
-try {
-    $result=$okex->order()->post([
-        'instrument_id'=>'BTC-USD-SWAP',
-        'type'=>'1',
-        'price'=>'5000',
-        'size'=>'1',
+    $result=$kumex->order()->get([
+        'order-id'=>$result['data']['orderId'],
     ]);
     print_r($result);
 }catch (\Exception $e){
@@ -337,23 +206,9 @@ try {
 }
 sleep(1);
 
-//Get order details by order ID.
 try {
-    $result=$okex->order()->get([
-        'instrument_id'=>'BTC-USD-SWAP',
-        'order_id'=>$result['order_id'],
-    ]);
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-sleep(1);
-
-//Cancelling an unfilled order.
-try {
-    $result=$okex->order()->postCancel([
-        'instrument_id'=>'BTC-USD-SWAP',
-        'order_id'=>$result['order_id'],
+    $result=$kumex->order()->delete([
+        'order-id'=>$result['data']['id'],
     ]);
     print_r($result);
 }catch (\Exception $e){
@@ -361,65 +216,43 @@ try {
 }
 ```
 
-Accounts related API [More](https://github.com/zhouaini528/okex-php/blob/master/tests/swap/accounts.php)
+Accounts related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kumex/accounts.php)
+
 ```php
-$okex=new OkexSpot($key,$secret,$passphrase);
-//This endpoint supports getting the list of assets(only show pairs with balance larger than 0), the balances, amount available/on hold in spot accounts.
 try {
-    $result=$okex->account()->getAll();
+    $result=$kumex->account()->getOverview();
     print_r($result);
 }catch (\Exception $e){
     print_r(json_decode($e->getMessage(),true));
 }
 
-//This endpoint supports getting the balance, amount available/on hold of a token in spot account.
 try {
-    $result=$okex->account()->get([
-        'instrument_id'=>'BTC-USD-SWAP'
-    ]);
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-
-//All paginated requests return the latest information (newest) as the first page sorted by newest (in chronological time) first.
-try {
-    $result=$okex->account()->getLedger([
-        'instrument_id'=>'BTC-USD-SWAP',
-        'limit'=>2,
-        //'type'=>'1',
-        //'from'=>'',
-        //'to'=>'',
-    ]);
+    $result=$kumex->account()->getTransactionHistory();
     print_r($result);
 }catch (\Exception $e){
     print_r(json_decode($e->getMessage(),true));
 }
 ```
 
-Position related API [More](https://github.com/zhouaini528/okex-php/blob/master/tests/swap/position.php)
+Position related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kumex/position.php)
 ```php
-$okex=new OkexFuture($key,$secret,$passphrase);
-
-//Get the information of holding positions of a contract.
 try {
-    $result=$okex->position()->get([
-        'instrument_id'=>'BTC-USD-SWAP',
-    ]);
+    $result=$kumex->position()->getAll();
     print_r($result);
 }catch (\Exception $e){
     print_r(json_decode($e->getMessage(),true));
 }
 
-//Get the information of all holding positions in futures trading.Due to high energy consumption, you are advised to capture data with the "Futures Account of a Currency" API instead.
 try {
-    $result=$okex->position()->getAll();
+    $result=$kumex->position()->get([
+        'symbol'=>'XBTUSDM',
+    ]);
     print_r($result);
 }catch (\Exception $e){
     print_r(json_decode($e->getMessage(),true));
 }
 ```
 
-[More Test](https://github.com/zhouaini528/okex-php/tree/master/tests/future)
+[More Test](https://github.com/zhouaini528/kucoin-php/tree/master/tests/kumex)
 
-[More API](https://github.com/zhouaini528/okex-php/tree/master/src/Api/Futures)
+[More API](https://github.com/zhouaini528/kucoin-php/tree/master/src/Api/Kumex)

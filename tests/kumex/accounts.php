@@ -9,16 +9,16 @@
  * Most of them are unfinished and need your help
  * https://github.com/zhouaini528/okex-php.git
  * */
-use Lin\Okex\OkexFuture;
+use Lin\Ku\Kumex;
 
 require __DIR__ .'../../../vendor/autoload.php';
 
 include 'key_secret.php';
 
-$okex=new OkexFuture($key,$secret,$passphrase);
+$kumex=new Kumex($key,$secret,$passphrase,$host);
 
 //You can set special needs
-$okex->setOptions([
+$kumex->setOptions([
     //Set the request timeout to 60 seconds by default
     'timeout'=>10,
     
@@ -31,34 +31,20 @@ $okex->setOptions([
      'no'    =>  ['.cn']
      ], */
     //Close the certificate
-    //'verify'=>false,
+    'verify'=>false,
 ]);
 
-//This endpoint supports getting the list of assets(only show pairs with balance larger than 0), the balances, amount available/on hold in spot accounts.
 try {
-    $result=$okex->account()->getAll();
+    $result=$kumex->account()->getOverview();
     print_r($result);
 }catch (\Exception $e){
     print_r(json_decode($e->getMessage(),true));
 }
 
-//This endpoint supports getting the balance, amount available/on hold of a token in spot account.
 try {
-    $result=$okex->account()->get([
-        'currency'=>'BTC'
-    ]);
+    $result=$kumex->account()->getTransactionHistory();
     print_r($result);
 }catch (\Exception $e){
     print_r(json_decode($e->getMessage(),true));
 }
 
-//All paginated requests return the latest information (newest) as the first page sorted by newest (in chronological time) first.
-try {
-    $result=$okex->account()->getLedger([
-        'currency'=>'btc',
-        'limit'=>2,
-    ]);
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}

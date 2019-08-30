@@ -3,22 +3,22 @@
 
 /**
  * @author lin <465382251@qq.com>
- * 
+ *
  * Fill in your key and secret and pass can be directly run
- * 
+ *
  * Most of them are unfinished and need your help
  * https://github.com/zhouaini528/okex-php.git
  * */
-use Lin\Okex\OkexFuture;
+use Lin\Ku\Kumex;
 
 require __DIR__ .'../../../vendor/autoload.php';
 
 include 'key_secret.php';
 
-$okex=new OkexFuture($key,$secret,$passphrase);
+$kumex=new Kumex($key,$secret,$passphrase,$host);
 
 //You can set special needs
-$okex->setOptions([
+$kumex->setOptions([
     //Set the request timeout to 60 seconds by default
     'timeout'=>10,
     
@@ -31,23 +31,24 @@ $okex->setOptions([
      'no'    =>  ['.cn']
      ], */
     //Close the certificate
-    //'verify'=>false,
+    'verify'=>false,
 ]);
 
-//Get the information of holding positions of a contract.
 try {
-    $result=$okex->position()->get([
-        'instrument_id'=>'BTC-USD-190628',
+    $result=$kumex->level()->getTwoSnapshot([
+        'symbol'=>'XBTUSDM',
     ]);
     print_r($result);
 }catch (\Exception $e){
     print_r(json_decode($e->getMessage(),true));
 }
 
-//Get the information of all holding positions in futures trading.Due to high energy consumption, you are advised to capture data with the "Futures Account of a Currency" API instead.
 try {
-    $result=$okex->position()->getAll();
+    $result=$kumex->level()->getThreeSnapshot([
+        'symbol'=>'XBTUSDM',
+    ]);
     print_r($result);
 }catch (\Exception $e){
     print_r(json_decode($e->getMessage(),true));
 }
+

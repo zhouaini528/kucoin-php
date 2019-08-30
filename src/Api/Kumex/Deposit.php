@@ -7,24 +7,25 @@ namespace Lin\Ku\Api\Kumex;
 
 use Lin\Ku\Request;
 
-class Accounts extends Request
+class Deposit extends Request
 {
     /**
-     * GET /api/v1/account-overview
+     * GET /api/v1/deposit-address
      * */
-    public function getOverview(){
+    public function getAddress(array $data=[]){
         $this->type='GET';
-        $this->path='/api/v1/account-overview';
+        $this->path='/api/v1/deposit-address';
+        $this->data=$data;
         
         return $this->exec();
     }
     
     /**
-     * GET /api/v1/transaction-history
+     * GET /api/v1/deposit-list
      * */
-    public function getTransactionHistory(array $data=[]){
+    public function getList(array $data=[]){
         $this->type='GET';
-        $this->path='/api/v1/transaction-history';
+        $this->path='/api/v1/deposit-list';
         $this->data=$data;
         
         return $this->exec();
