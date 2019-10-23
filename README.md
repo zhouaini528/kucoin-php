@@ -24,7 +24,7 @@ Many interfaces are not yet complete, and users can continue to extend them base
 
 #### Installation
 ```
-composer require "linwj/kucoin dev-master"
+composer require linwj/kucoin
 ```
 
 Support for more request Settings
