@@ -6,7 +6,7 @@ Kumex docs [https://docs.kumex.com](https://docs.kumex.com)
 
 All interface methods are initialized the same as those provided by kucoin. See details [src/api](https://github.com/zhouaini528/kucoin-php/tree/master/src/Api)
 
-Many interfaces are not yet complete, and users can continue to extend them based on my design. Welcome to improve it with me
+Most of the interface is now complete, and the user can continue to extend it based on my design, working with me to improve it.
 
 [中文文档](https://github.com/zhouaini528/kucoin-php/blob/master/README_CN.md)
 
