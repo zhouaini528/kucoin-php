@@ -23,7 +23,7 @@ $kumex->setOptions([
     'timeout'=>10,
     
     //If you are developing locally and need an agent, you can set this
-    'proxy'=>true,
+    //'proxy'=>true,
     //More flexible Settings
     /* 'proxy'=>[
      'http'  => 'http://127.0.0.1:12333',
@@ -31,7 +31,7 @@ $kumex->setOptions([
      'no'    =>  ['.cn']
      ], */
     //Close the certificate
-    'verify'=>false,
+    //'verify'=>false,
 ]);
 
 $clientOid=rand(10000,99999).rand(10000,99999);
@@ -42,8 +42,8 @@ try {
         'symbol'=>'XBTUSDM',
         'leverage'=>10,
         
-        'price'=>9000,
-        'size'=>10,
+        'price'=>8100,
+        'size'=>100,
     ]);
     print_r($result);
 }catch (\Exception $e){
