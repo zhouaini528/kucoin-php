@@ -21,7 +21,7 @@ $kumex=new Kumex($key,$secret,$passphrase,$host);
 $kumex->setOptions([
     //Set the request timeout to 60 seconds by default
     'timeout'=>10,
-    
+
     //If you are developing locally and need an agent, you can set this
     //'proxy'=>true,
     //More flexible Settings
@@ -41,7 +41,7 @@ try {
         'side'=>'buy',
         'symbol'=>'XBTUSDM',
         'leverage'=>10,
-        
+
         'price'=>8100,
         'size'=>100,
     ]);
@@ -53,7 +53,8 @@ sleep(1);
 
 try {
     $result=$kumex->order()->get([
-        'order-id'=>$result['data']['orderId'],
+        //'order_id'=>$result['data']['orderId'],
+        'client_order_id'=>$clientOid,
     ]);
     print_r($result);
 }catch (\Exception $e){
@@ -63,7 +64,7 @@ sleep(1);
 
 try {
     $result=$kumex->order()->delete([
-        'order-id'=>$result['data']['id'],
+        'order_id'=>$result['data']['id'],
     ]);
     print_r($result);
 }catch (\Exception $e){

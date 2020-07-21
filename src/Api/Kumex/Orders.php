@@ -16,23 +16,23 @@ class Orders extends Request
         $this->type='POST';
         $this->path='/api/v1/orders';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * DELETE /api/v1/orders/{order-id}
      * */
     public function delete(array $data=[]){
         $this->type='DELETE';
-        $this->path='/api/v1/orders/'.$data['order-id'];
-        unset($data['order-id']);
-        
+        $this->path='/api/v1/orders/'.$data['order_id'];
+        unset($data['order_id']);
+
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * DELETE /api/v1/orders
      * */
@@ -40,10 +40,10 @@ class Orders extends Request
         $this->type='DELETE';
         $this->path='/api/v1/orders';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * DELETE /api/v1/stopOrders
      * */
@@ -51,11 +51,11 @@ class Orders extends Request
         $this->type='DELETE';
         $this->path='/api/v1/stopOrders';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
-    
+
+
     /**
      * GET /api/v1/orders
      * */
@@ -63,10 +63,10 @@ class Orders extends Request
         $this->type='GET';
         $this->path='/api/v1/orders';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/stopOrders
      * */
@@ -74,10 +74,10 @@ class Orders extends Request
         $this->type='GET';
         $this->path='/api/v1/stopOrders';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/recentDoneOrders
      * */
@@ -85,21 +85,32 @@ class Orders extends Request
         $this->type='GET';
         $this->path='/api/v1/recentDoneOrders';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
-     * GET /api/v1/orders/{order-id}
+     * GET /api/v1/orders/{order-id}?clientOid={client-order-id}
+     * GET /api/v1/orders/5cdfc138b21023a909e5ad55 (通过 orderId 获取订单信息)
+     * GET /api/v1/orders/byClientOid?clientOid=eresc138b21023a909e5ad59 (通过用户传入的订单 id查询订单信息)
      * */
     public function get(array $data=[]){
+        $this->path='/api/v1/orders/';
+
+        if(isset($data['client_order_id'])) {
+            $this->path.='byClientOid?clientOid='.$data['client_order_id'];
+        }
+        if(isset($data['order_id'])) {
+            $this->path.=$data['order_id'];
+        }
+
+        unset($data['order_id']);
+        unset($data['client_order_id']);
+
         $this->type='GET';
-        $this->path='/api/v1/orders/'.$data['order-id'];
-        unset($data['order-id']);
-        
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
 }
