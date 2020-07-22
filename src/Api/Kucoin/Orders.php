@@ -16,10 +16,10 @@ class Orders extends Request
         $this->type='POST';
         $this->path='/api/v1/orders';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * DELETE /api/v1/orders/{orderId}
      * */
@@ -27,32 +27,32 @@ class Orders extends Request
         $this->type='DELETE';
         $this->path='/api/v1/orders/'.$data['orderId'];
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * DELETE /api/v1/orders
      * */
-    public function deleteAll(array $data=[]){
+    public function deletes(array $data=[]){
         $this->type='DELETE';
         $this->path='/api/v1/orders/';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/orders
      * */
-    public function getAll(array $data=[]){
+    public function gets(array $data=[]){
         $this->type='GET';
         $this->path='/api/v1/orders/';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/hist-orders
      * */
@@ -60,10 +60,10 @@ class Orders extends Request
         $this->type='GET';
         $this->path='/api/v1/hist-orders';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/limit/orders
      * */
@@ -71,10 +71,10 @@ class Orders extends Request
         $this->type='GET';
         $this->path='/api/v1/limit/orders';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/orders/{orderId}
      * */
@@ -82,9 +82,9 @@ class Orders extends Request
         $this->type='GET';
         $this->path='/api/v1/orders/'.$data['orderId'];
         unset($data['orderId']);
-        
+
         $this->data=$data;
-        
+
         return $this->exec();
     }
 }

@@ -36,7 +36,7 @@ class Orders extends Request
     /**
      * DELETE /api/v1/orders
      * */
-    public function deleteAll(array $data=[]){
+    public function deletes(array $data=[]){
         $this->type='DELETE';
         $this->path='/api/v1/orders';
         $this->data=$data;
@@ -59,7 +59,7 @@ class Orders extends Request
     /**
      * GET /api/v1/orders
      * */
-    public function getAll(array $data=[]){
+    public function gets(array $data=[]){
         $this->type='GET';
         $this->path='/api/v1/orders';
         $this->data=$data;
@@ -70,7 +70,7 @@ class Orders extends Request
     /**
      * GET /api/v1/stopOrders
      * */
-    public function getStopAll(array $data=[]){
+    public function getStops(array $data=[]){
         $this->type='GET';
         $this->path='/api/v1/stopOrders';
         $this->data=$data;
