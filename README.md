@@ -22,7 +22,7 @@ Most of the interface is now complete, and the user can continue to extend it ba
 
 [Binance](https://github.com/zhouaini528/binance-php)
 
-[Kucoin](https://github.com/zhouaini528/Kucoin-php)
+[Kucoin/Kumex](https://github.com/zhouaini528/Kucoin-php)
 
 [Mxc](https://github.com/zhouaini528/mxc-php)
 

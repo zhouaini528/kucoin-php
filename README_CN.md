@@ -22,7 +22,7 @@ Kumex 文档地址 [https://docs.kumex.com/cn](https://docs.kumex.com/cn)
 
 [Binance](https://github.com/zhouaini528/binance-php)
 
-[Kucoin](https://github.com/zhouaini528/Kucoin-php)
+[Kucoin/Kumex](https://github.com/zhouaini528/Kucoin-php)
 
 [Mxc](https://github.com/zhouaini528/mxc-php)
 
