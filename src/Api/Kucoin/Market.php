@@ -14,7 +14,7 @@ class Market extends Request
      * */
     public function getSymbols(array $data=[]){
         $this->type='GET';
-        $this->path='/api/v1/fills';
+        $this->path='/api/v1/symbols';
         $this->data=$data;
         return $this->exec();
     }
