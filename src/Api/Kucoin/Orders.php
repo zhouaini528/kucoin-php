@@ -10,6 +10,17 @@ use Lin\Ku\Request;
 class Orders extends Request
 {
     /**
+     * POST /api/v1/stop-order
+     * */
+    public function postStop(array $data=[]){
+        $this->type='POST';
+        $this->path='/api/v1/stop-order';
+        $this->data=$data;
+
+        return $this->exec();
+    }
+    
+    /**
      * POST /api/v1/orders
      * */
     public function post(array $data=[]){
