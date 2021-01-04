@@ -78,9 +78,10 @@ class Request
                 $body=json_encode($this->data);
             }
         }
-
-        $plain = $this->nonce . $path . $body;
-        $this->signature = base64_encode(hash_hmac('sha256', $plain, $this->secret, true));
+        
+        $timestamp  = $timestamp ? $timestamp : time() * 1000;
+        $plain      = $timestamp . $this->type . $path . $body;
+        $this->signature =  base64_encode(hash_hmac("sha256", $what, $this->secret, true));
     }
 
     /**
