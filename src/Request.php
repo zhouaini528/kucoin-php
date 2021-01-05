@@ -7,6 +7,7 @@ namespace Lin\Ku;
 
 use GuzzleHttp\Exception\RequestException;
 use Lin\Ku\Exceptions\Exception;
+use function GuzzleHttp\default_user_agent;
 
 class Request
 {
@@ -34,6 +35,8 @@ class Request
 
     protected $options=[];
 
+    protected $platform='';
+
     public function __construct(array $data)
     {
         $this->key=$data['key'] ?? '';
@@ -42,6 +45,8 @@ class Request
         $this->host=$data['host'] ?? '';
 
         $this->options=$data['options'] ?? [];
+
+        $this->platform=$data['platform'];
     }
 
     /**
@@ -78,10 +83,9 @@ class Request
                 $body=json_encode($this->data);
             }
         }
-        
-        $timestamp  = $timestamp ? $timestamp : time() * 1000;
-        $plain      = $timestamp . $this->type . $path . $body;
-        $this->signature =  base64_encode(hash_hmac("sha256", $what, $this->secret, true));
+
+        $plain = $this->nonce . $path . $body;
+        $this->signature = base64_encode(hash_hmac('sha256', $plain, $this->secret, true));
     }
 
     /**
@@ -96,6 +100,17 @@ class Request
             'KC-API-PASSPHRASE' => $this->passphrase,
             'KC-API-SIGN'       => $this->signature,
         ];
+
+        switch ($this->platform){
+            case 'spot':{
+                if(isset($this->options['headers']['KC-API-KEY-VERSION']) && $this->options['headers']['KC-API-KEY-VERSION']==1) break;
+
+                $this->headers['KC-API-KEY-VERSION']=2;
+                $this->headers['KC-API-PASSPHRASE']=base64_encode(hash_hmac('sha256', $this->passphrase, $this->secret, true));
+            }
+            case 'future':;
+            default:;
+        }
     }
 
     /**

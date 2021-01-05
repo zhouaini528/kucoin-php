@@ -1,8 +1,8 @@
 ### It is recommended that you read the official document first
 
-Kucoin docs [https://docs.kucoin.com](https://docs.kucoin.com)
+Kucoin spot docs [https://docs.kucoin.com](https://docs.kucoin.com)
 
-Kumex docs [https://docs.kumex.com](https://docs.kumex.com)
+Kucoin futures docs [https://docs.kumex.com](https://docs.kucoin.com/futures/)
 
 All interface methods are initialized the same as those provided by kucoin. See details [src/api](https://github.com/zhouaini528/kucoin-php/tree/master/src/Api)
 
@@ -50,11 +50,14 @@ Support for more request Settings
 $kucoin=new kucoin();
 //You can set special needs
 $kucoin->setOptions([
+    //The default is v2 api, you can set
+    //'headers'=>['KC-API-KEY-VERSION'=>1],
+
     //Set the request timeout to 60 seconds by default
     'timeout'=>10,
     
     //If you are developing locally and need an agent, you can set this
-    'proxy'=>true,
+    //'proxy'=>true,
 
     //More flexible Settings
     /* 'proxy'=>[
