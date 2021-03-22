@@ -3,7 +3,7 @@
  * @author lin <465382251@qq.com>
  * */
 
-namespace Lin\Ku\Api\Kucoin;
+namespace Lin\Ku\Api\Spot;
 
 use Lin\Ku\Request;
 
@@ -18,7 +18,7 @@ class Market extends Request
         $this->data=$data;
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/market/allTickers
      * */
@@ -27,7 +27,7 @@ class Market extends Request
         $this->path='/api/v1/market/allTickers';
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/markets
      * */
@@ -37,7 +37,7 @@ class Market extends Request
         $this->data=$data;
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/market/orderbook/level1
      * */
@@ -47,7 +47,7 @@ class Market extends Request
         $this->data=$data;
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/market/orderbook/level2_20
      * */
@@ -57,7 +57,7 @@ class Market extends Request
         $this->data=$data;
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/market/orderbook/level2_100
      * */
@@ -67,7 +67,7 @@ class Market extends Request
         $this->data=$data;
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v2/market/orderbook/level2
      * */
@@ -77,7 +77,7 @@ class Market extends Request
         $this->data=$data;
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/market/orderbook/level3
      * */
@@ -87,7 +87,7 @@ class Market extends Request
         $this->data=$data;
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/market/histories
      * */
@@ -97,7 +97,7 @@ class Market extends Request
         $this->data=$data;
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/market/candles
      * */

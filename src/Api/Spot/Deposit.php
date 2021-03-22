@@ -3,7 +3,7 @@
  * @author lin <465382251@qq.com>
  * */
 
-namespace Lin\Ku\Api\Kucoin;
+namespace Lin\Ku\Api\Spot;
 
 use Lin\Ku\Request;
 
@@ -18,7 +18,7 @@ class Deposit extends Request
         $this->data=$data;
         return $this->exec();
     }
-    
+
     /**
      *GET /api/v1/deposit-addresses
      * */
@@ -28,7 +28,7 @@ class Deposit extends Request
         $this->data=$data;
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/deposits
      * */
@@ -38,7 +38,7 @@ class Deposit extends Request
         $this->data=$data;
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/hist-deposits
      * */

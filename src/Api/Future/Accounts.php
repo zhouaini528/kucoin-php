@@ -3,7 +3,7 @@
  * @author lin <465382251@qq.com>
  * */
 
-namespace Lin\Ku\Api\Kumex;
+namespace Lin\Ku\Api\Future;
 
 use Lin\Ku\Request;
 
@@ -15,10 +15,10 @@ class Accounts extends Request
     public function getOverview(){
         $this->type='GET';
         $this->path='/api/v1/account-overview';
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/transaction-history
      * */
@@ -26,8 +26,8 @@ class Accounts extends Request
         $this->type='GET';
         $this->path='/api/v1/transaction-history';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
 }

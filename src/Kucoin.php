@@ -6,13 +6,13 @@
 namespace Lin\Ku;
 
 
-use Lin\Ku\Api\Kucoin\Accounts;
-use Lin\Ku\Api\Kucoin\Orders;
-use Lin\Ku\Api\Kucoin\Currencies;
-use Lin\Ku\Api\Kucoin\Deposit;
-use Lin\Ku\Api\Kucoin\Fills;
-use Lin\Ku\Api\Kucoin\Market;
-use Lin\Ku\Api\Kucoin\Withdrawals;
+use Lin\Ku\Api\Spot\Accounts;
+use Lin\Ku\Api\Spot\Orders;
+use Lin\Ku\Api\Spot\Currencies;
+use Lin\Ku\Api\Spot\Deposit;
+use Lin\Ku\Api\Spot\Fills;
+use Lin\Ku\Api\Spot\Market;
+use Lin\Ku\Api\Spot\Withdrawals;
 
 class Kucoin
 {

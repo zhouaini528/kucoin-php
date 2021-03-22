@@ -3,7 +3,7 @@
  * @author lin <465382251@qq.com>
  * */
 
-namespace Lin\Ku\Api\Kumex;
+namespace Lin\Ku\Api\Future;
 
 use Lin\Ku\Request;
 
@@ -16,10 +16,10 @@ class Level extends Request
         $this->type='GET';
         $this->path='/api/v1/level2/snapshot';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/level2/message/query
      * */
@@ -27,10 +27,10 @@ class Level extends Request
         $this->type='GET';
         $this->path='/api/v1/level2/message/query';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/level3/snapshot
      * */
@@ -38,10 +38,10 @@ class Level extends Request
         $this->type='GET';
         $this->path='/api/v1/level3/snapshot';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/level3/message/query
      * */
@@ -49,8 +49,8 @@ class Level extends Request
         $this->type='GET';
         $this->path='/api/v1/level3/message/query';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
 }

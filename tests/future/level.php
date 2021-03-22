@@ -9,21 +9,21 @@
  * Most of them are unfinished and need your help
  * https://github.com/zhouaini528/okex-php.git
  * */
-use Lin\Ku\Kucoin;
+use Lin\Ku\Kumex;
 
 require __DIR__ .'../../../vendor/autoload.php';
 
 include 'key_secret.php';
 
-$kucoin=new Kucoin($key,$secret,$passphrase,$host);
+$kumex=new Kumex($key,$secret,$passphrase);
 
 //You can set special needs
-$kucoin->setOptions([
+$kumex->setOptions([
     //Set the request timeout to 60 seconds by default
     'timeout'=>10,
-    
+
     //If you are developing locally and need an agent, you can set this
-    'proxy'=>true,
+    //'proxy'=>true,
     //More flexible Settings
     /* 'proxy'=>[
      'http'  => 'http://127.0.0.1:12333',
@@ -31,26 +31,24 @@ $kucoin->setOptions([
      'no'    =>  ['.cn']
      ], */
     //Close the certificate
-    'verify'=>false,
+    //'verify'=>false,
 ]);
 
-//Place an Order
 try {
-    $result=$kucoin->account()->getAll();
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-
-try {
-    $result=$kucoin->account()->get([
-        'accountId'=>'5d5cba60ef83c753ca6ddd16',
+    $result=$kumex->level()->getTwoSnapshot([
+        'symbol'=>'XBTUSDM',
     ]);
     print_r($result);
 }catch (\Exception $e){
     print_r(json_decode($e->getMessage(),true));
 }
 
-
-
+try {
+    $result=$kumex->level()->getThreeSnapshot([
+        'symbol'=>'XBTUSDM',
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
 

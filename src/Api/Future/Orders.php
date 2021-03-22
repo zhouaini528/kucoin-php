@@ -3,7 +3,7 @@
  * @author lin <465382251@qq.com>
  * */
 
-namespace Lin\Ku\Api\Kumex;
+namespace Lin\Ku\Api\Future;
 
 use Lin\Ku\Request;
 

@@ -3,7 +3,7 @@
  * @author lin <465382251@qq.com>
  * */
 
-namespace Lin\Ku\Api\Kucoin;
+namespace Lin\Ku\Api\Spot;
 
 use Lin\Ku\Request;
 
@@ -19,7 +19,7 @@ class Orders extends Request
 
         return $this->exec();
     }
-    
+
     /**
      * POST /api/v1/orders
      * */

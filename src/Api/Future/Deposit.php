@@ -3,7 +3,7 @@
  * @author lin <465382251@qq.com>
  * */
 
-namespace Lin\Ku\Api\Kumex;
+namespace Lin\Ku\Api\Future;
 
 use Lin\Ku\Request;
 
@@ -16,10 +16,10 @@ class Deposit extends Request
         $this->type='GET';
         $this->path='/api/v1/deposit-address';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/deposit-list
      * */
@@ -27,8 +27,8 @@ class Deposit extends Request
         $this->type='GET';
         $this->path='/api/v1/deposit-list';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
 }

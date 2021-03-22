@@ -3,7 +3,7 @@
  * @author lin <465382251@qq.com>
  * */
 
-namespace Lin\Ku\Api\Kumex;
+namespace Lin\Ku\Api\Future;
 
 use Lin\Ku\Request;
 
@@ -16,10 +16,10 @@ class Withdrawals extends Request
         $this->type='GET';
         $this->path='/api/v1/withdrawals/quotas';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * POST /api/v1/withdrawals
      * */
@@ -27,11 +27,11 @@ class Withdrawals extends Request
         $this->type='POST';
         $this->path='/api/v1/withdrawals';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
-    
+
+
     /**
      * GET /api/v1/withdrawal-list
      * */
@@ -39,10 +39,10 @@ class Withdrawals extends Request
         $this->type='GET';
         $this->path='/api/v1/withdrawal-list';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * DELETE /api/v1/withdrawals/{withdrawalId}
      * */
@@ -50,8 +50,8 @@ class Withdrawals extends Request
         $this->type='DELETE';
         $this->path='/api/v1/withdrawals/';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
 }

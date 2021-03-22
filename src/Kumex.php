@@ -6,16 +6,16 @@
 namespace Lin\Ku;
 
 
-use Lin\Ku\Api\Kumex\Accounts;
-use Lin\Ku\Api\Kumex\Contracts;
-use Lin\Ku\Api\Kumex\Deposit;
-use Lin\Ku\Api\Kumex\Fills;
-use Lin\Ku\Api\Kumex\Level;
-use Lin\Ku\Api\Kumex\Orders;
-use Lin\Ku\Api\Kumex\Position;
-use Lin\Ku\Api\Kumex\System;
-use Lin\Ku\Api\Kumex\Transfer;
-use Lin\Ku\Api\Kumex\Withdrawals;
+use Lin\Ku\Api\Future\Accounts;
+use Lin\Ku\Api\Future\Contracts;
+use Lin\Ku\Api\Future\Deposit;
+use Lin\Ku\Api\Future\Fills;
+use Lin\Ku\Api\Future\Level;
+use Lin\Ku\Api\Future\Orders;
+use Lin\Ku\Api\Future\Position;
+use Lin\Ku\Api\Future\System;
+use Lin\Ku\Api\Future\Transfer;
+use Lin\Ku\Api\Future\Withdrawals;
 
 class Kumex
 {

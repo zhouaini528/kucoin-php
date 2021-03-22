@@ -15,13 +15,10 @@ require __DIR__ .'../../../vendor/autoload.php';
 
 include 'key_secret.php';
 
-$kucoin=new Kucoin($key,$secret,$passphrase,$host);
+$kucoin=new Kucoin($key,$secret,$passphrase);
 
 //You can set special needs
 $kucoin->setOptions([
-    //The default is v2 api
-    //'headers'=>['KC-API-KEY-VERSION'=>1],
-
     //Set the request timeout to 60 seconds by default
     'timeout'=>10,
 
@@ -37,55 +34,22 @@ $kucoin->setOptions([
     //'verify'=>false,
 ]);
 
-$client_id=rand(10000,99999).rand(10000,99999);
 try {
-    $result=$kucoin->order()->post([
-        'clientOid'=>$client_id,
-        'side'=>'buy',
-        'symbol'=>'ETH-BTC',
-        'price'=>'0.0001',
-        'size'=>'10',
-
-        //'type'=>'market',
-        //'size'=>'0.1'
-    ]);
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-sleep(1);
-
-die;
-//Place an Order
-try {
-    $result=$kucoin->order()->get([
-        'orderId'=>$result['data']['orderId']
-    ]);
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-sleep(1);
-
-try {
-    $result=$kucoin->order()->delete([
-        'orderId'=>$result['data']['id']
-    ]);
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-sleep(1);
-
-try {
-    $result=$kucoin->order()->deletes([
-        'symbol'=>'ETH-BTC'
-    ]);
+    $result=$kucoin->currencies()->getAll();
     print_r($result);
 }catch (\Exception $e){
     print_r(json_decode($e->getMessage(),true));
 }
 
+try {
+    $result=$kucoin->currencies()->get([
+        'currency'=>'BTC',
+        //'chain'=>'ERC20',
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
 
 
 

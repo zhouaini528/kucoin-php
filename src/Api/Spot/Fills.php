@@ -3,7 +3,7 @@
  * @author lin <465382251@qq.com>
  * */
 
-namespace Lin\Ku\Api\Kucoin;
+namespace Lin\Ku\Api\Spot;
 
 use Lin\Ku\Request;
 
@@ -17,7 +17,7 @@ class Fills extends Request
         $this->path='/api/v1/fills';
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/limit/fills
      * */

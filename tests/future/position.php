@@ -15,7 +15,7 @@ require __DIR__ .'../../../vendor/autoload.php';
 
 include 'key_secret.php';
 
-$kumex=new Kumex($key,$secret,$passphrase,$host);
+$kumex=new Kumex($key,$secret,$passphrase);
 
 //You can set special needs
 $kumex->setOptions([
@@ -34,37 +34,16 @@ $kumex->setOptions([
     //'verify'=>false,
 ]);
 
-$clientOid=rand(10000,99999).rand(10000,99999);
 try {
-    $result=$kumex->order()->post([
-        'clientOid'=>$clientOid,
-        'side'=>'buy',
+    $result=$kumex->position()->getAll();
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
+
+try {
+    $result=$kumex->position()->get([
         'symbol'=>'XBTUSDM',
-        'leverage'=>10,
-
-        'price'=>8100,
-        'size'=>100,
-    ]);
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-sleep(1);
-
-try {
-    $result=$kumex->order()->get([
-        //'order_id'=>$result['data']['orderId'],
-        'client_order_id'=>$clientOid,
-    ]);
-    print_r($result);
-}catch (\Exception $e){
-    print_r(json_decode($e->getMessage(),true));
-}
-sleep(1);
-
-try {
-    $result=$kumex->order()->delete([
-        'order_id'=>$result['data']['id'],
     ]);
     print_r($result);
 }catch (\Exception $e){

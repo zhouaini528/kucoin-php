@@ -3,7 +3,7 @@
  * @author lin <465382251@qq.com>
  * */
 
-namespace Lin\Ku\Api\Kumex;
+namespace Lin\Ku\Api\Future;
 
 use Lin\Ku\Request;
 
@@ -16,10 +16,10 @@ class System extends Request
         $this->type='GET';
         $this->path='/api/v1/funding-history';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/ticker
      * */
@@ -27,20 +27,20 @@ class System extends Request
         $this->type='GET';
         $this->path='/api/v1/ticker';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/timestamp
      * */
     public function getTimestamp(){
         $this->type='GET';
         $this->path='/api/v1/timestamp';
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/trade/history
      * */
@@ -48,10 +48,10 @@ class System extends Request
         $this->type='GET';
         $this->path='/api/v1/trade/history';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/interest/query
      * */
@@ -59,10 +59,10 @@ class System extends Request
         $this->type='GET';
         $this->path='/api/v1/interest/query';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/index/query
      * */
@@ -70,10 +70,10 @@ class System extends Request
         $this->type='GET';
         $this->path='/api/v1/index/query';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/mark-price/{symbol}/current
      * */
@@ -81,12 +81,12 @@ class System extends Request
         $this->type='GET';
         $this->path='GET /api/v1/mark-price/'.$data['symbol'].'/current';
         unset($data['symbol']);
-        
+
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /api/v1/premium/query
      * */
@@ -94,10 +94,10 @@ class System extends Request
         $this->type='GET';
         $this->path='/api/v1/premium/query';
         $this->data=$data;
-        
+
         return $this->exec();
     }
-    
+
     /**
      * GET /v1/funding-rate/{symbol}/current
      * */
@@ -105,7 +105,7 @@ class System extends Request
         $this->type='GET';
         $this->path='/v1/funding-rate/'.$data['symbol'].'/current';
         $this->data=$data;
-        
+
         return $this->exec();
     }
 }
