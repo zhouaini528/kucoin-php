@@ -30,7 +30,7 @@ Kucoin 期货 文档地址 [https://docs.kucoin.com/futures/cn/](https://docs.ku
 
 [ZB](https://github.com/zhouaini528/zb-php)
 
-[Bitfinex](https://github.com/zhouaini528/zb-php)
+[Bitfinex](https://github.com/zhouaini528/bitfinex-php)
 
 [Bittrex](https://github.com/zhouaini528/bittrex-php)
 
