@@ -2,7 +2,7 @@
 
 Kucoin spot docs [https://docs.kucoin.com](https://docs.kucoin.com)
 
-Kucoin futures docs [https://docs.kumex.com](https://docs.kucoin.com/futures/)
+Kucoin futures docs [https://docs.kucoin.com/futures/](https://docs.kucoin.com/futures/)
 
 All interface methods are initialized the same as those provided by kucoin. See details [src/api](https://github.com/zhouaini528/kucoin-php/tree/master/src/Api)
 
@@ -183,13 +183,13 @@ try {
 
 [More API](https://github.com/zhouaini528/kucoin-php/tree/master/src/Api/Kucoin)
 
-### Kumex Trading API
+### Trading API
 
-Order Book API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kumex/level.php)
+Order Book API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/future/level.php)
 
 ```php
 try {
-    $result=$kumex->level()->getTwoSnapshot([
+    $result=$kucoin->level()->getTwoSnapshot([
         'symbol'=>'XBTUSDM',
     ]);
     print_r($result);
@@ -198,7 +198,7 @@ try {
 }
 
 try {
-    $result=$kumex->level()->getThreeSnapshot([
+    $result=$kucoin->level()->getThreeSnapshot([
         'symbol'=>'XBTUSDM',
     ]);
     print_r($result);
@@ -207,12 +207,12 @@ try {
 }
 ```
 
-Order related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kumex/order.php)
+Order related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/future/order.php)
 
 ```php
 $clientOid=rand(10000,99999).rand(10000,99999);
 try {
-    $result=$kumex->order()->post([
+    $result=$kucoin->order()->post([
         'clientOid'=>$clientOid,
         'side'=>'buy',
         'symbol'=>'XBTUSDM',
@@ -228,7 +228,7 @@ try {
 sleep(1);
 
 try {
-    $result=$kumex->order()->get([
+    $result=$kucoin->order()->get([
         'order-id'=>$result['data']['orderId'],
     ]);
     print_r($result);
@@ -238,7 +238,7 @@ try {
 sleep(1);
 
 try {
-    $result=$kumex->order()->delete([
+    $result=$kucoin->order()->delete([
         'order-id'=>$result['data']['id'],
     ]);
     print_r($result);
@@ -247,35 +247,35 @@ try {
 }
 ```
 
-Accounts related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kumex/accounts.php)
+Accounts related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/future/accounts.php)
 
 ```php
 try {
-    $result=$kumex->account()->getOverview();
+    $result=$kucoin->account()->getOverview();
     print_r($result);
 }catch (\Exception $e){
     print_r($e->getMessage());
 }
 
 try {
-    $result=$kumex->account()->getTransactionHistory();
+    $result=$kucoin->account()->getTransactionHistory();
     print_r($result);
 }catch (\Exception $e){
     print_r($e->getMessage());
 }
 ```
 
-Position related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kumex/position.php)
+Position related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/future/position.php)
 ```php
 try {
-    $result=$kumex->position()->getAll();
+    $result=$kucoin->position()->getAll();
     print_r($result);
 }catch (\Exception $e){
     print_r($e->getMessage());
 }
 
 try {
-    $result=$kumex->position()->get([
+    $result=$kucoin->position()->get([
         'symbol'=>'XBTUSDM',
     ]);
     print_r($result);
@@ -284,6 +284,6 @@ try {
 }
 ```
 
-[More Test](https://github.com/zhouaini528/kucoin-php/tree/master/tests/kumex)
+[More Test](https://github.com/zhouaini528/kucoin-php/tree/master/tests/future)
 
-[More API](https://github.com/zhouaini528/kucoin-php/tree/master/src/Api/Kumex)
+[More API](https://github.com/zhouaini528/kucoin-php/tree/master/src/Api/future)

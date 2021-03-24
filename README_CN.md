@@ -2,7 +2,7 @@
 
 Kucoin 现货 文档地址 [https://docs.kucoin.com/cn](https://docs.kucoin.com/cn)
 
-Kucoin 期货 文档地址 [https://docs.kumex.com/cn](https://docs.kucoin.com/futures/cn/)
+Kucoin 期货 文档地址 [https://docs.kucoin.com/futures/cn/](https://docs.kucoin.com/futures/cn/)
 
 所有接口方法的初始化都与kucoin提供的方法相同。更多细节 [src/api](https://github.com/zhouaini528/kucoin-php/tree/master/src/Api)
 
@@ -183,13 +183,13 @@ try {
 
 [更多API请查看](https://github.com/zhouaini528/kucoin-php/tree/master/src/Api/Kucoin)
 
-### Kumex 交易 API
+### 交易 API
 
-Order Book API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kumex/level.php)
+Order Book API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kucoin/level.php)
 
 ```php
 try {
-    $result=$kumex->level()->getTwoSnapshot([
+    $result=$kucoin->level()->getTwoSnapshot([
         'symbol'=>'XBTUSDM',
     ]);
     print_r($result);
@@ -198,7 +198,7 @@ try {
 }
 
 try {
-    $result=$kumex->level()->getThreeSnapshot([
+    $result=$kucoin->level()->getThreeSnapshot([
         'symbol'=>'XBTUSDM',
     ]);
     print_r($result);
@@ -207,12 +207,12 @@ try {
 }
 ```
 
-Order related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kumex/order.php)
+Order related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kucoin/order.php)
 
 ```php
 $clientOid=rand(10000,99999).rand(10000,99999);
 try {
-    $result=$kumex->order()->post([
+    $result=$kucoin->order()->post([
         'clientOid'=>$clientOid,
         'side'=>'buy',
         'symbol'=>'XBTUSDM',
@@ -228,7 +228,7 @@ try {
 sleep(1);
 
 try {
-    $result=$kumex->order()->get([
+    $result=$kucoin->order()->get([
         'order-id'=>$result['data']['orderId'],
     ]);
     print_r($result);
@@ -238,7 +238,7 @@ try {
 sleep(1);
 
 try {
-    $result=$kumex->order()->delete([
+    $result=$kucoin->order()->delete([
         'order-id'=>$result['data']['id'],
     ]);
     print_r($result);
@@ -247,35 +247,35 @@ try {
 }
 ```
 
-Accounts related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kumex/accounts.php)
+Accounts related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kucoin/accounts.php)
 
 ```php
 try {
-    $result=$kumex->account()->getOverview();
+    $result=$kucoin->account()->getOverview();
     print_r($result);
 }catch (\Exception $e){
     print_r($e->getMessage());
 }
 
 try {
-    $result=$kumex->account()->getTransactionHistory();
+    $result=$kucoin->account()->getTransactionHistory();
     print_r($result);
 }catch (\Exception $e){
     print_r($e->getMessage());
 }
 ```
 
-Position related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kumex/position.php)
+Position related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kucoin/position.php)
 ```php
 try {
-    $result=$kumex->position()->getAll();
+    $result=$kucoin->position()->getAll();
     print_r($result);
 }catch (\Exception $e){
     print_r($e->getMessage());
 }
 
 try {
-    $result=$kumex->position()->get([
+    $result=$kucoin->position()->get([
         'symbol'=>'XBTUSDM',
     ]);
     print_r($result);
@@ -284,6 +284,6 @@ try {
 }
 ```
 
-[更多用例请查看](https://github.com/zhouaini528/kucoin-php/tree/master/tests/kumex)
+[更多用例请查看](https://github.com/zhouaini528/kucoin-php/tree/master/tests/kucoin)
 
-[更多API请查看](https://github.com/zhouaini528/kucoin-php/tree/master/src/Api/Kumex)
+[更多API请查看](https://github.com/zhouaini528/kucoin-php/tree/master/src/Api/kucoin)
