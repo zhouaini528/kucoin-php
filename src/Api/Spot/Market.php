@@ -29,9 +29,19 @@ class Market extends Request
     }
 
     /**
-     * GET /api/v1/markets
+     * GET /api/v1/market/stats
      * */
     public function getStats(array $data=[]){
+        $this->type='GET';
+        $this->path='/api/v1/market/stats';
+        $this->data=$data;
+        return $this->exec();
+    }
+
+    /**
+     * GET /api/v1/markets
+     * */
+    public function get(array $data=[]){
         $this->type='GET';
         $this->path='/api/v1/markets';
         $this->data=$data;

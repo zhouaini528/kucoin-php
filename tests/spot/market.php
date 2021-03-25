@@ -50,6 +50,22 @@ try {
     print_r(json_decode($e->getMessage(),true));
 }
 
+try {
+    $result=$kucoin->market()->get();
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
+
+try {
+    $result=$kucoin->market()->getStats([
+        'symbol'=>'BTC-USDT'
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
+
 
 
 
