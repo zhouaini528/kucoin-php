@@ -188,6 +188,8 @@ try {
 Order Book API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/future/level.php)
 
 ```php
+$kucoin=new KucoinFuture();
+
 try {
     $result=$kucoin->level()->getTwoSnapshot([
         'symbol'=>'XBTUSDM',
@@ -210,10 +212,11 @@ try {
 Order related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/future/order.php)
 
 ```php
-$clientOid=rand(10000,99999).rand(10000,99999);
+$kucoin=new KucoinFuture($key,$secret,$passphrase);
+
 try {
     $result=$kucoin->order()->post([
-        'clientOid'=>$clientOid,
+        'clientOid'=>'xxxxxxx',
         'side'=>'buy',
         'symbol'=>'XBTUSDM',
         'leverage'=>10,
@@ -250,6 +253,8 @@ try {
 Accounts related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/future/accounts.php)
 
 ```php
+$kucoin=new KucoinFuture($key,$secret,$passphrase);
+
 try {
     $result=$kucoin->account()->getOverview();
     print_r($result);
@@ -267,6 +272,8 @@ try {
 
 Position related API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/future/position.php)
 ```php
+$kucoin=new KucoinFuture($key,$secret,$passphrase);
+
 try {
     $result=$kucoin->position()->getAll();
     print_r($result);
