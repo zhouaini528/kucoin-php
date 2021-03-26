@@ -81,7 +81,7 @@ $kucoin->setOptions([
 ]);
 ```
 
-### Kucoin Trading API
+### Spot Trading API
 
 Order Book [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kucoin/market.php)
 
@@ -183,7 +183,7 @@ try {
 
 [More API](https://github.com/zhouaini528/kucoin-php/tree/master/src/Api/Kucoin)
 
-### Trading API
+### Future Trading API
 
 Order Book API [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/future/level.php)
 

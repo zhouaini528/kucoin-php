@@ -9,16 +9,16 @@
  * Most of them are unfinished and need your help
  * https://github.com/zhouaini528/okex-php.git
  * */
-use Lin\Ku\Kumex;
+use Lin\Ku\KucoinFuture;
 
 require __DIR__ .'../../../vendor/autoload.php';
 
 include 'key_secret.php';
 
-$kumex=new Kumex($key,$secret,$passphrase);
+$kucoin=new KucoinFuture();
 
 //You can set special needs
-$kumex->setOptions([
+$kucoin->setOptions([
     //Set the request timeout to 60 seconds by default
     'timeout'=>10,
 
@@ -35,7 +35,7 @@ $kumex->setOptions([
 ]);
 
 try {
-    $result=$kumex->level()->getTwoSnapshot([
+    $result=$kucoin->level()->getTwoSnapshot([
         'symbol'=>'XBTUSDM',
     ]);
     print_r($result);
@@ -44,7 +44,7 @@ try {
 }
 
 try {
-    $result=$kumex->level()->getThreeSnapshot([
+    $result=$kucoin->level()->getThreeSnapshot([
         'symbol'=>'XBTUSDM',
     ]);
     print_r($result);

@@ -9,16 +9,16 @@
  * Most of them are unfinished and need your help
  * https://github.com/zhouaini528/okex-php.git
  * */
-use Lin\Ku\Kumex;
+use Lin\Ku\KucoinFuture;
 
 require __DIR__ .'../../../vendor/autoload.php';
 
 include 'key_secret.php';
 
-$kumex=new Kumex($key,$secret,$passphrase);
+$kucoin=new KucoinFuture($key,$secret,$passphrase);
 
 //You can set special needs
-$kumex->setOptions([
+$kucoin->setOptions([
     //Set the request timeout to 60 seconds by default
     'timeout'=>10,
 
@@ -35,14 +35,14 @@ $kumex->setOptions([
 ]);
 
 try {
-    $result=$kumex->account()->getOverview();
+    $result=$kucoin->account()->getOverview();
     print_r($result);
 }catch (\Exception $e){
     print_r(json_decode($e->getMessage(),true));
 }
 
 try {
-    $result=$kumex->account()->getTransactionHistory();
+    $result=$kucoin->account()->getTransactionHistory();
     print_r($result);
 }catch (\Exception $e){
     print_r(json_decode($e->getMessage(),true));

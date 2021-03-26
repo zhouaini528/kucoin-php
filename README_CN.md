@@ -81,7 +81,7 @@ $okex->setOptions([
 ]);
 ```
 
-### Kucoin 交易 API
+### 现货 API
 
 Order Book [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/kucoin/market.php)
 
@@ -287,3 +287,116 @@ try {
 [更多用例请查看](https://github.com/zhouaini528/kucoin-php/tree/master/tests/kucoin)
 
 [更多API请查看](https://github.com/zhouaini528/kucoin-php/tree/master/src/Api/kucoin)
+
+
+### 期货 API
+
+Market [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/future/level.php)
+
+```php
+$kucoin=new KucoinFuture();
+
+try {
+    $result=$kucoin->account()->getOverview();
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
+
+try {
+    $result=$kucoin->account()->getTransactionHistory();
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
+```
+
+Accounts [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/future/account.php)
+
+```php
+$kucoin=new KucoinFuture($key,$secret,$passphrase);
+
+try {
+    $result=$kucoin->account()->getOverview();
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
+
+try {
+    $result=$kucoin->account()->getTransactionHistory();
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
+```
+
+Order [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/future/order.php)
+
+```php
+$kucoin=new KucoinFuture($key,$secret,$passphrase);
+
+try {
+    $result=$kucoin->order()->post([
+        'clientOid'=>'xxxxxxxxx',
+        'side'=>'buy',
+        'symbol'=>'XBTUSDM',
+        'leverage'=>10,
+
+        'price'=>8100,
+        'size'=>100,
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
+sleep(1);
+
+try {
+    $result=$kucoin->order()->get([
+        //'order_id'=>$result['data']['orderId'],
+        'client_order_id'=>'xxxxxx',
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
+sleep(1);
+
+try {
+    $result=$kucoin->order()->delete([
+        'order_id'=>'xxxxxxx',
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
+```
+
+Position [More](https://github.com/zhouaini528/kucoin-php/blob/master/tests/future/position.php)
+
+```php
+$kucoin=new KucoinFuture($key,$secret,$passphrase);
+
+try {
+    $result=$kucoin->position()->getAll();
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
+
+try {
+    $result=$kucoin->position()->get([
+        'symbol'=>'XBTUSDM',
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
+```
+
+[更多用例请查看](https://github.com/zhouaini528/kucoin-php/tree/master/tests/future)
+
+[更多API请查看](https://github.com/zhouaini528/kucoin-php/tree/master/src/Api/Future)
+
+
