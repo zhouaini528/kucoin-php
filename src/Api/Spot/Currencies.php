@@ -14,16 +14,17 @@ class Currencies extends Request
      * */
     public function getAll(){
         $this->type='GET';
-        $this->path='/api/v1/currencies';
+        $this->path='/api/v3/currencies';
         return $this->exec();
     }
 
     /**
      * GET /api/v1/currencies/{currency}
+     * /api/v3/currencies/{currency}
      * */
     public function get(array $data=[]){
         $this->type='GET';
-        $this->path='/api/v1/currencies/';
+        $this->path='/api/v3/currencies/';
         $this->data=$data;
 
         return $this->exec();
