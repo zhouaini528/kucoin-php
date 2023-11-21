@@ -98,4 +98,15 @@ class Orders extends Request
 
         return $this->exec();
     }
+
+    /**
+     * /api/v1/order/client-order/{clientOid}
+     * */
+    public function getClientOrder(array $data=[]){
+        $this->type='GET';
+        $this->path='/api/v1/order/client-order/'.$data['clientOid'];
+        $this->data=$data;
+
+        return $this->exec();
+    }
 }
