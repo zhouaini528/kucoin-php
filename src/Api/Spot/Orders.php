@@ -109,4 +109,15 @@ class Orders extends Request
 
         return $this->exec();
     }
+
+    /**
+     * DELETE /api/v1/order/client-order/{clientOid}
+     * */
+    public function deleteClientOrder(array $data=[]){
+        $this->type='DELETE';
+        $this->path='/api/v1/order/client-order/'.$data['clientOid'];
+        $this->data=$data;
+
+        return $this->exec();
+    }
 }
