@@ -7,7 +7,6 @@ namespace Lin\Ku;
 
 use GuzzleHttp\Exception\RequestException;
 use Lin\Ku\Exceptions\Exception;
-use function GuzzleHttp\default_user_agent;
 
 class Request
 {
@@ -121,14 +120,6 @@ class Request
 
         $this->options['headers']=$this->headers;
         $this->options['timeout'] = $this->options['timeout'] ?? 60;
-
-        if(isset($this->options['proxy']) && $this->options['proxy']===true) {
-            $this->options['proxy']=[
-                'http'  => 'http://127.0.0.1:12333',
-                'https' => 'http://127.0.0.1:12333',
-                'no'    =>  ['.cn']
-            ];
-        }
     }
 
     /**
